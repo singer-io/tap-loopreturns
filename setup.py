@@ -4,7 +4,7 @@ from setuptools import setup
 setup(
     name="tap-loopreturns",
     version="0.1.0",
-    description="Singer.io tap for extracting Loop Returns data",
+    description="Singer.io tap for extracting data",
     author="Loop Returns",
     url="http://loopreturns.com",
     classifiers=["Programming Language :: Python :: 3 :: Only"],
