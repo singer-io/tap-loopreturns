@@ -7,7 +7,7 @@ from singer.catalog import Catalog, CatalogEntry
 from singer.schema import Schema
 
 
-REQUIRED_CONFIG_KEYS = ["start_date", "username", "password"]
+REQUIRED_CONFIG_KEYS = ["start_date", "api_key"]
 LOGGER = singer.get_logger()
 
 
@@ -29,6 +29,7 @@ def load_schemas():
 def discover():
     raw_schemas = load_schemas()
     streams = []
+
     for stream_id, schema in raw_schemas.items():
         # TODO: populate any metadata and stream's key properties here..
         stream_metadata = []
