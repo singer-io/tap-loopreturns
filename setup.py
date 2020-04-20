@@ -2,7 +2,7 @@
 from setuptools import setup
 
 setup(
-    name="tap-loopreturns-2",
+    name="tap-loopreturns",
     version="0.1.0",
     description="Singer.io tap for extracting data",
     author="Stitch",
@@ -15,7 +15,7 @@ setup(
     ],
     entry_points="""
     [console_scripts]
-    tap-loopreturns-2=tap_loopreturns:main
+    tap-loopreturns=tap_loopreturns:main
     """,
     packages=["tap_loopreturns"],
     package_data = {
