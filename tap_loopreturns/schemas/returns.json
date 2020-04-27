@@ -20,8 +20,7 @@
       "type": [
         "null",
         "string"
-      ],
-      "format": "date-time"
+      ]
     },
     "order_id": {
       "type": [
@@ -219,8 +218,7 @@
             "type": [
               "null",
               "string"
-            ],
-            "format": "date-time"
+            ]
           },
           "exchange_variant": {
             "type": [
@@ -334,8 +332,7 @@
       "type": [
         "null",
         "string"
-      ],
-      "format": "date-time"
+      ]
     }
   }
 }
