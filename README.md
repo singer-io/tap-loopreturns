@@ -15,7 +15,7 @@ This tap:
 # Quickstart
 
 ### 1.  Installation
-```shell
+```shell 
     pip install tap-loopreturns
 ```
 
@@ -39,7 +39,7 @@ tap-loopreturns -c config.json -d
 See the Singer docs on discovery mode [here.](https://github.com/singer-io/getting-started/blob/master/docs/DISCOVERY_MODE.md#discovery-mode)
 
 ### 4.  Run the tap in Sync mode.
-```shell script
+```shell
 # For the first sync
 tap-loopreturns -c config.json --catalog catalog.json
 
