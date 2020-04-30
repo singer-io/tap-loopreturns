@@ -5,8 +5,6 @@ import sys
 import singer
 
 from singer import utils, metadata
-from singer.catalog import Catalog, CatalogEntry
-from singer.schema import Schema
 
 from tap_loopreturns.streams import STREAMS
 from tap_loopreturns.context import Context
@@ -32,8 +30,6 @@ def stream_is_selected(mdata):
 def get_selected_streams(catalog):
     selected_stream_names = []
     for stream in catalog.streams:
-        #mdata = metadata.to_map(stream.metadata)
-        #if stream_is_selected(mdata):
         selected_stream_names.append(stream.tap_stream_id)
     return selected_stream_names
 
@@ -82,6 +78,7 @@ def main():
         json.dump(catalog, sys.stdout, indent=2)
     else:
         state = parsed_args.state or {}
+        # If we have state - we need to unset the end_date in the config file.
         if len(state) > 0:
             client.end_date = None
         catalog = parsed_args.catalog
