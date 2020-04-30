@@ -15,7 +15,7 @@ This tap:
 # Quickstart
 
 ### 1.  Installation
-```shell 
+```shell
     pip install tap-loopreturns
 ```
 
@@ -39,7 +39,7 @@ tap-loopreturns -c config.json -d
 See the Singer docs on discovery mode [here.](https://github.com/singer-io/getting-started/blob/master/docs/DISCOVERY_MODE.md#discovery-mode)
 
 ### 4.  Run the tap in Sync mode.
-```shell
+```shell 
 # For the first sync
 tap-loopreturns -c config.json --catalog catalog.json
 
@@ -48,6 +48,18 @@ tap-loopreturns -c config.json --catalog catalog.json --state state.json
 ```
 See the Singer docs on sync mode [here.](https://github.com/singer-io/getting-started/blob/master/docs/SYNC_MODE.md)
 
+### 5.  Examples
+```shell
+# run the tap in discovery mode and capture the catalog
+tap-loopreturns -c config.json -d > catalog.json
+
+# run the tap in sync mode to verify data flow
+tap-loopreturns -c config.json --catalog catalog.json
+
+# run the tap in sync mode to verify the next data step
+tap-loopreturns -c config.json --catalog catalog.json --state.json
+
+```
 ---
 
 Copyright &copy; 2020 Loop

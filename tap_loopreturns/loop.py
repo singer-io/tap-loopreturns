@@ -32,5 +32,5 @@ class Loop:
         url = url.format(start_date=parse.quote(bookmark),
                          column_name=column_name,
                          end_date=self.end_date)
-        LOGGER.info("Sending request to %s", url)
+        # LOGGER.info("Sending request to %s", url)
         return self._get(url)

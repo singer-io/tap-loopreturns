@@ -4,7 +4,7 @@
 
 import os
 import json
-from datetime import timedelta
+from datetime import datetime, timedelta
 import singer
 
 from singer import metadata
@@ -53,6 +53,25 @@ class Stream():
         if value is None or self.is_bookmark_old(state, value, name):
             singer.write_bookmark(state, name, self.replication_key, value)
 
+    def get_end_date(self, start):
+        end = start
+        if self.client.end_date is not None:
+            end = max( utils.strptime_with_tz( self.client.end_date ), start )
+        else:
+            end += timedelta(hours=24)
+        return end
+
+
+    def update_final_bookmark(self, state, starting_mark, name=None):
+        name = self.name if not name else name
+        bookmark = utils.strptime_with_tz( self.get_bookmark( state ) )
+        starting_window = utils.strptime_with_tz( starting_mark )
+        ending_window = self.get_end_date( starting_window )
+        if bookmark < ending_window < utils.now():
+            bookmark = ending_window
+        singer.write_bookmark(state, name, self.replication_key, bookmark.strftime('%Y-%m-%d %H:%M:%SZ'))
+
+
     def is_bookmark_old(self, state, value, name):
         current_bookmark = self.get_bookmark(state, name)
         return utils.strptime_with_tz(value) > utils.strptime_with_tz(current_bookmark)
@@ -95,6 +114,7 @@ class Stream():
             for item in res:
                 self.update_bookmark(state, item[self.replication_key])
                 yield (self.stream, item)
+            self.update_final_bookmark(state, bookmark)
 
         elif self.replication_method == "FULL_TABLE":
             for item in res:
@@ -109,14 +129,6 @@ class Returns(Stream):
     replication_method = "INCREMENTAL"
     replication_key = "created_at"
     key_properties = ["id"]
-
-    def get_bookmark(self, state, name=None):
-        name = self.name if not name else name
-        mark = singer.get_bookmark(state, name, self.replication_key)
-        if mark is not None:
-            mark = parse(mark) + timedelta(seconds=1)
-        return (mark.strftime('%Y-%m-%d %H:%M:%SZ')
-                or Context.config["start_date"])
 
 
 STREAMS = {
