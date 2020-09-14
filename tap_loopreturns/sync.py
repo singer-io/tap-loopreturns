@@ -16,7 +16,6 @@ def sync_stream(state, instance):
         for (stream, record) in instance.sync(state):
             counter.increment()
 
-            # try:
             with Transformer() as transformer:
                 record = transformer.transform(record,
                                                stream.schema.to_dict(),
@@ -24,9 +23,5 @@ def sync_stream(state, instance):
             singer.write_record(stream.tap_stream_id, record)
             if instance.replication_method == "INCREMENTAL":
                 singer.write_state(state)
-
-            # except Exception as e:
-            #     LOGGER.error('Handled exception: {error}'.format(error=str(e)))
-            #     continue
 
         return counter.value
