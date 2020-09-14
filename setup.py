@@ -11,13 +11,13 @@ setup(
     py_modules=["tap_loopreturns"],
     install_requires=[
         "singer-python==5.9.0",
-        "requests",
+        "requests==2.24.0",
     ],
     extras_require={
         'dev': [
-            'pylint',
-            'ipdb',
-            'nose'
+            'pylint==2.6.0',
+            'ipdb==0.13.3',
+            'nose==1.3.7'
         ]
     },
     entry_points="""

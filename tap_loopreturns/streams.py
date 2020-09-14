@@ -4,7 +4,7 @@
 
 import os
 import json
-from datetime import datetime, timedelta
+from datetime import timedelta
 import singer
 
 from singer import metadata
