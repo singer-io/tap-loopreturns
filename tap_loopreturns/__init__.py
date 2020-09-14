@@ -14,7 +14,8 @@ from tap_loopreturns.sync import sync_stream
 
 REQUIRED_CONFIG_KEYS = [
     "start_date",
-    "api_key"
+    "api_key",
+    "end_date",
 ]
 LOGGER = singer.get_logger()
 
