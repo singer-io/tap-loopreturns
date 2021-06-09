@@ -62,4 +62,4 @@ tap-loopreturns -c config.json --catalog catalog.json --state.json
 ```
 ---
 
-Copyright &copy; 2020 Loop
+Copyright &copy; 2020 Stitch
